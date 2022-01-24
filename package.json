@@ -1,0 +1,10 @@
+{
+  "name": "220125_libSquoosh",
+  "version": "0.0.0",
+  "private": "true",
+  "workspaces": [
+    "webpack",
+    "vite",
+    "basic"
+  ]
+}
