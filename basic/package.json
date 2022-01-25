@@ -7,6 +7,7 @@
   },
   "scripts": {
     "optimise": "node optimise.mjs",
-    "resize": "node resize.mjs"
+    "resize": "node resize.mjs",
+    "convert": "node convert.mjs"
   }
 }
