@@ -76,7 +76,7 @@ for (const item of imagePoolList) {
     mkdirSync(OUTPUT_DIR);
   }
   // ファイルを書き込む
-  await writeFile(`${OUTPUT_DIR}/${name}`, data.binary);
+  await writeFile(`${OUTPUT_DIR}/optimized_${name}`, data.binary);
 }
 
 // imagePoolを閉じる
