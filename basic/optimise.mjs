@@ -37,7 +37,8 @@ const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
 // 抽出したファイルをimagePool内にセットし、ファイル名とimagePoolの配列を作成
 const imagePoolList = imageFileList.map((fileName) => {
   const imageFile = readFileSync(`${IMAGE_DIR}/${fileName}`);
-  return { name: fileName, image: imagePool.ingestImage(imageFile) };
+  const image = imagePool.ingestImage(imageFile);
+  return { name: fileName, image };
 });
 
 // JPGならMozJPEGをに、PNGならOxiPNGに圧縮する

@@ -58,7 +58,8 @@ const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
 // 抽出したファイルをimagePool内にセットすし、ファイル名とimagePoolの配列を作成
 const imagePoolList = imageFileList.map((fileName) => {
   const imageFile = readFileSync(`${IMAGE_DIR}/${fileName}`);
-  return { name: fileName, image: imagePool.ingestImage(imageFile) };
+  const image = imagePool.ingestImage(imageFile);
+  return { name: fileName, image };
 });
 
 // 前処理を実行

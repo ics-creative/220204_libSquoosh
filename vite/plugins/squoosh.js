@@ -25,7 +25,8 @@ export default function squoosh() {
       });
       const imagePoolList = imageFileList.map((file) => {
         const imageSource = bundle[file].source;
-        return { file, image: imagePool.ingestImage(imageSource) };
+        const image = imagePool.ingestImage(imageSource);
+        return { file, image };
       });
 
       await Promise.all(
