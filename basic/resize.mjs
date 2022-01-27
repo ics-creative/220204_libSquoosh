@@ -58,28 +58,28 @@ const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
 // 抽出したファイルをimagePool内にセットすし、ファイル名とimagePoolの配列を作成
 const imagePoolList = imageFileList.map((fileName) => {
   const imageFile = readFileSync(`${IMAGE_DIR}/${fileName}`);
-  return { name: fileName, imagePool: imagePool.ingestImage(imageFile) };
+  return { name: fileName, image: imagePool.ingestImage(imageFile) };
 });
 
 // 前処理を実行
 await Promise.all(
   imagePoolList.map(async (item) => {
-    const { imagePool } = item;
+    const { image } = item;
     // リサイズなどを処理するためにデコードする
-    await imagePool.decoded;
-    return await imagePool.preprocess(preprocessOptions);
+    await image.decoded;
+    return await image.preprocess(preprocessOptions);
   })
 );
 
 // JPGならMozJPEGをに、PNGならOxiPNGに圧縮する
 await Promise.all(
   imagePoolList.map(async (item) => {
-    const { imagePool } = item;
+    const { image } = item;
     if (/\.(jpe?g)/i.test(item.name)) {
-      await imagePool.encode(jpgEncodeOptions);
+      await image.encode(jpgEncodeOptions);
     }
     if (/\.(png)/i.test(item.name)) {
-      await imagePool.encode(pngEncodeOptions);
+      await image.encode(pngEncodeOptions);
     }
   })
 );
@@ -88,7 +88,7 @@ await Promise.all(
 for (const item of imagePoolList) {
   const {
     name,
-    imagePool: { encodedWith },
+    image: { encodedWith },
   } = item;
 
   // 圧縮したデータを格納する変数
@@ -112,5 +112,3 @@ for (const item of imagePoolList) {
 
 // imagePoolを閉じる
 await imagePool.close();
-
-// npx @squoosh/cli --resize '{"enabled":true,"width":644,"height":800,"method":"lanczos3","fitMethod":"contain","premultiply":true,"linearRGB":true}' --mozjpeg '{"quality":75,"baseline":false,"arithmetic":false,"progressive":true,"optimize_coding":true,"smoothing":0,"color_space":3,"quant_table":3,"trellis_multipass":false,"trellis_opt_zero":false,"trellis_opt_table":false,"trellis_loops":1,"auto_subsample":true,"chroma_subsample":2,"separate_chroma_quality":false,"chroma_quality":75}'

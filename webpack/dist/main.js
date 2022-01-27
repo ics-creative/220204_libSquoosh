@@ -41,10 +41,10 @@ module.exports = __webpack_require__.p + "./image/sample1.jpg";
 
 /***/ }),
 
-/***/ 747:
+/***/ 76:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "./image/sample2.jpg";
+module.exports = __webpack_require__.p + "./image/sample2.webp";
 
 /***/ }),
 
@@ -181,7 +181,7 @@ var __webpack_exports__ = {};
 // Imports
 
 var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(77), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(747), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(76), __webpack_require__.b);
 var ___HTML_LOADER_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(923), __webpack_require__.b);
 // Module
 var ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);

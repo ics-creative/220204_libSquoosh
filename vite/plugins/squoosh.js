@@ -25,29 +25,29 @@ export default function squoosh() {
       });
       const imagePoolList = imageFileList.map((file) => {
         const imageSource = bundle[file].source;
-        return { file, imagePool: imagePool.ingestImage(imageSource) };
+        return { file, image: imagePool.ingestImage(imageSource) };
       });
 
       await Promise.all(
         imagePoolList.map(async (item) => {
-          const { imagePool, file } = item;
+          const { image, file } = item;
           if (/\.(jpe?g)/i.test(file)) {
-            await imagePool.encode(jpgEncodeOptions);
+            await image.encode(jpgEncodeOptions);
           }
           if (/\.(png)/i.test(file)) {
-            await imagePool.encode(pngEncodeOptions);
+            await image.encode(pngEncodeOptions);
           }
         })
       );
 
       for (const item of imagePoolList) {
-        const { imagePool, file } = item;
+        const { image, file } = item;
         let data;
         if (/\.(jpe?g)/i.test(file)) {
-          data = await imagePool.encodedWith.mozjpeg;
+          data = await image.encodedWith.mozjpeg;
         }
         if (/\.(png)/i.test(file)) {
-          data = await imagePool.encodedWith.oxipng;
+          data = await image.encodedWith.oxipng;
         }
         bundle[file].source = data.binary;
       }

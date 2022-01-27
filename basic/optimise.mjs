@@ -37,18 +37,18 @@ const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
 // 抽出したファイルをimagePool内にセットし、ファイル名とimagePoolの配列を作成
 const imagePoolList = imageFileList.map((fileName) => {
   const imageFile = readFileSync(`${IMAGE_DIR}/${fileName}`);
-  return { name: fileName, imagePool: imagePool.ingestImage(imageFile) };
+  return { name: fileName, image: imagePool.ingestImage(imageFile) };
 });
 
 // JPGならMozJPEGをに、PNGならOxiPNGに圧縮する
 await Promise.all(
   imagePoolList.map(async (item) => {
-    const { imagePool } = item;
+    const { image } = item;
     if (/\.(jpe?g)/i.test(item.name)) {
-      await imagePool.encode(jpgEncodeOptions);
+      await image.encode(jpgEncodeOptions);
     }
     if (/\.(png)/i.test(item.name)) {
-      await imagePool.encode(pngEncodeOptions);
+      await image.encode(pngEncodeOptions);
     }
   })
 );
@@ -57,7 +57,7 @@ await Promise.all(
 for (const item of imagePoolList) {
   const {
     name,
-    imagePool: { encodedWith },
+    image: { encodedWith },
   } = item;
 
   // 圧縮したデータを格納する変数

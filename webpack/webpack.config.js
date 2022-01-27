@@ -23,6 +23,19 @@ module.exports = {
   optimization: {
     minimizer: [
       new ImageMinimizerPlugin({
+        generator: [
+          {
+            preset: "webp",
+            implementation: ImageMinimizerPlugin.squooshGenerate,
+            options: {
+              encodeOptions: {
+                webp: {
+                  quality: 70,
+                },
+              },
+            },
+          },
+        ],
         minimizer: {
           implementation: ImageMinimizerPlugin.squooshMinify,
           filename: "[name][ext]",

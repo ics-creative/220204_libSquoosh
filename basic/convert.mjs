@@ -32,14 +32,14 @@ const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
 // 抽出したファイルをimagePool内にセットすし、ファイル名とimagePoolの配列を作成
 const imagePoolList = imageFileList.map((fileName) => {
   const imageFile = readFileSync(`${IMAGE_DIR}/${fileName}`);
-  return { name: fileName, imagePool: imagePool.ingestImage(imageFile) };
+  return { name: fileName, image: imagePool.ingestImage(imageFile) };
 });
 
 // Webpで圧縮する
 await Promise.all(
   imagePoolList.map(async (item) => {
-    const { imagePool } = item;
-    await imagePool.encode(webpEncodeOptions);
+    const { image } = item;
+    await image.encode(webpEncodeOptions);
   })
 );
 
@@ -47,7 +47,7 @@ await Promise.all(
 for (const item of imagePoolList) {
   const {
     name,
-    imagePool: { encodedWith },
+    image: { encodedWith },
   } = item;
 
   // WebPで圧縮したデータを取得
