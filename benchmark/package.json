@@ -1,0 +1,14 @@
+{
+  "name": "basic",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@squoosh/lib": "0.4.0",
+    "imagemin": "8.0.1",
+    "imagemin-mozjpeg": "10.0.0",
+    "prettier": "2.5.1"
+  },
+  "scripts": {
+    "squoosh": "node squoosh.mjs",
+    "imagemin": "node imagemin.mjs"
+  }
+}

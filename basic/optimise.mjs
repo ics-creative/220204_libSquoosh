@@ -16,7 +16,7 @@ const IMAGE_DIR = "./images";
  */
 const OUTPUT_DIR = "./dist";
 
-// JPGの圧縮オプション
+// JPEGの圧縮オプション
 const jpgEncodeOptions = {
   mozjpeg: { quality: 75 },
 };
@@ -28,7 +28,7 @@ const pngEncodeOptions = {
   },
 };
 
-// 画像フォルダ内のJPGとPNGを抽出
+// 画像フォルダ内のJPEGとPNGを抽出
 const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
   const regex = /\.(jpe?g|png)/i;
   return regex.test(file);
@@ -41,7 +41,7 @@ const imagePoolList = imageFileList.map((fileName) => {
   return { name: fileName, image };
 });
 
-// JPGならMozJPEGをに、PNGならOxiPNGに圧縮する
+// JPEGならMozJPEGをに、PNGならOxiPNGに圧縮する
 await Promise.all(
   imagePoolList.map(async (item) => {
     const { image } = item;
