@@ -20,7 +20,7 @@ export default function squoosh() {
     async generateBundle(_options, bundle) {
       // JPGとPNGを抽出
       const imageFileList = Object.keys(bundle).filter((key) => {
-        const regex = /\.(jpe?g|png)/i;
+        const regex = /\.(jpe?g|png)$/i;
         return regex.test(key);
       });
       const imagePoolList = imageFileList.map((file) => {
@@ -32,10 +32,10 @@ export default function squoosh() {
       await Promise.all(
         imagePoolList.map(async (item) => {
           const { image, file } = item;
-          if (/\.(jpe?g)/i.test(file)) {
+          if (/\.(jpe?g)$/i.test(file)) {
             await image.encode(jpgEncodeOptions);
           }
-          if (/\.(png)/i.test(file)) {
+          if (/\.(png)$/i.test(file)) {
             await image.encode(pngEncodeOptions);
           }
         })

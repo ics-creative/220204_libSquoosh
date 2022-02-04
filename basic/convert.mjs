@@ -24,7 +24,7 @@ const webpEncodeOptions = {
 
 // 画像フォルダ内のJPGとPNGを抽出
 const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
-  const regex = /\.(jpe?g|png)/i;
+  const regex = /\.(jpe?g|png)$/i;
   return regex.test(file);
 });
 

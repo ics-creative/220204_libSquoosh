@@ -16,7 +16,7 @@ const OUTPUT_DIR = "./dist_squoosh";
 
 // 画像フォルダ内のJPEGとPNGを抽出
 const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
-  const regex = /\.(jpe?g|png)/i;
+  const regex = /\.(jpe?g|png)$/i;
   return regex.test(file);
 });
 

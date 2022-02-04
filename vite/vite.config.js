@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import squoosh from "./plugins/squoosh";
+import squoosh from "./plugins/squoosh.js";
 
 export default defineConfig({
   root:"./src/",

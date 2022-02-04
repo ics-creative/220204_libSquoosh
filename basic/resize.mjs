@@ -49,7 +49,7 @@ const preprocessOptions = {
 
 // 画像フォルダ内のJPGとPNGを抽出
 const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
-  const regex = /\.(jpe?g|png)/i;
+  const regex = /\.(jpe?g|png)$/i;
   return regex.test(file);
 });
 
@@ -74,10 +74,10 @@ await Promise.all(
 await Promise.all(
   imagePoolList.map(async (item) => {
     const { image } = item;
-    if (/\.(jpe?g)/i.test(item.name)) {
+    if (/\.(jpe?g)$/i.test(item.name)) {
       await image.encode(jpgEncodeOptions);
     }
-    if (/\.(png)/i.test(item.name)) {
+    if (/\.(png)$/i.test(item.name)) {
       await image.encode(pngEncodeOptions);
     }
   })
