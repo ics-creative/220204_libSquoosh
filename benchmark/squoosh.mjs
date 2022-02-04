@@ -27,7 +27,7 @@ const imagePoolList = imageFileList.map((fileName) => {
   return { name: fileName, image };
 });
 
-// JPEGならMozJPEGをに、PNGならOxiPNGに圧縮する
+// JPEGならMozJPEGに、PNGならOxiPNGに圧縮する
 await Promise.all(
   imagePoolList.map(async (item) => {
     const { image } = item;
