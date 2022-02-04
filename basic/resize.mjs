@@ -6,13 +6,11 @@ const imagePool = new ImagePool(cpus().length);
 
 /**
  * 画像フォルダのパス。今回はこのフォルダ内の画像を対象とする
- * @type {string}
  */
 const IMAGE_DIR = "./images";
 
 /**
  * 出力先フォルダ
- * @type {string}
  */
 const OUTPUT_DIR = "./dist";
 
