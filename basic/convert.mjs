@@ -2,6 +2,7 @@ import { ImagePool } from "@squoosh/lib";
 import { cpus } from "os";
 import { existsSync, readdirSync, readFileSync, mkdirSync } from "fs";
 import { writeFile } from "fs/promises";
+import path from "path";
 const imagePool = new ImagePool(cpus().length);
 
 /**
@@ -29,9 +30,10 @@ const imageFileList = readdirSync(IMAGE_DIR).filter((file) => {
   return regex.test(file);
 });
 
-// 抽出したファイルをimagePool内にセットすし、ファイル名とimagePoolの配列を作成
-const imagePoolList = imageFileList.map((fileName) => {
-  const imageFile = readFileSync(`${IMAGE_DIR}/${fileName}`);
+// 抽出したファイルをimagePool内にセットし、ファイル名とimagePoolの配列を作成
+const imagePoolList = imageFileList.map((file) => {
+  const imageFile = readFileSync(`${IMAGE_DIR}/${file}`);
+  const fileName = path.parse(`${IMAGE_DIR}/${file}`).name;
   const image = imagePool.ingestImage(imageFile);
   return { name: fileName, image };
 });
@@ -58,10 +60,7 @@ for (const item of imagePoolList) {
     mkdirSync(OUTPUT_DIR);
   }
   // 拡張子をwebpに変換してファイルを書き込む
-  await writeFile(
-    `${OUTPUT_DIR}/${name.replace(/\.(jpe?g|png)/i, ".webp")}`,
-    data.binary
-  );
+  await writeFile(`${OUTPUT_DIR}/${name}.webp`, data.binary);
 }
 
 // imagePoolを閉じる
